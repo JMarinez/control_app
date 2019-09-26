@@ -1,6 +1,6 @@
-# flutter_app
+# control_app
 
-A new Flutter project.
+My first Flutter project. Recreating principal functions of an old project.
 
 ## Getting Started
 
