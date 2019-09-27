@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(ControlApp());
+  runApp(MyApp());
 }
 
-class ControlApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState(){
+    return MyAppState();
+  } 
+
+}
+
+class MyAppState extends State<MyApp> {
+  var currentQuestion = 0;
+
+  void changeQuestion() {
+    setState(() {
+     currentQuestion = currentQuestion + 1; 
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    var questions = ["How's the weather?", "How you doin?"];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -18,7 +36,7 @@ class ControlApp extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text("Control"),
+                child: Text("Drawer Header"),
                 decoration: BoxDecoration(color: Colors.red),
               ),
               ListTile(
@@ -35,22 +53,25 @@ class ControlApp extends StatelessWidget {
         body: Center(
           child: Column(
             children: <Widget>[
-              Text("Estado:"),
+              Text(questions[currentQuestion]),
               RaisedButton(
                 child: Text("Asistio"),
                 onPressed: () {
+                  changeQuestion();
                   print("Asistio!");
                 },
               ),
               RaisedButton(
                 child: Text("Llego tarde"),
                 onPressed: () {
+                  changeQuestion();
                   print("Llego tarde!");
                 },
               ),
               RaisedButton(
                 child: Text("No llego"),
                 onPressed: () {
+                  changeQuestion();
                   print("No llego!");
                 },
               )
