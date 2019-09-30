@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _currentQuestion = 0;
 
-  void _changeQuestion() {
+  void _answerQuestion() {
     setState(() {
       _currentQuestion = _currentQuestion + 1;
     });
@@ -24,7 +25,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = ["How's the weather?", "How you doin?"];
+    const questions = [
+      {
+        "questionText": "How's the weather?", 
+        "answers": ["Sunny", "Rainy", "Cloudy"]
+      },
+      { 
+        "questionText": "How you doin?",
+        "answers": ["Good", "OK", "Sad", "Depressed"]
+      },
+      {
+        "questionText": "Is Flutter amazing?",
+        "answers": ["Totally", "It's alright", "Horrible"]
+      }
+    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -53,29 +67,11 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: <Widget>[
             Question(
-              questions[_currentQuestion],
+              questions[_currentQuestion]["questionText"],
             ),
-            RaisedButton(
-              child: Text("Asistio"),
-              onPressed: () {
-                _changeQuestion();
-                print("Asistio!");
-              },
-            ),
-            RaisedButton(
-              child: Text("Llego tarde"),
-              onPressed: () {
-                _changeQuestion();
-                print("Llego tarde!");
-              },
-            ),
-            RaisedButton(
-              child: Text("No llego"),
-              onPressed: () {
-                _changeQuestion();
-                print("No llego!");
-              },
-            )
+            ...(questions[_currentQuestion]["answers"] as List<String>).map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
