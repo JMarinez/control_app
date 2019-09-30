@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-
   @override
-  State<StatefulWidget> createState(){
-    return MyAppState();
-  } 
-
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
 }
 
-class MyAppState extends State<MyApp> {
-  var currentQuestion = 0;
+class _MyAppState extends State<MyApp> {
+  var _currentQuestion = 0;
 
-  void changeQuestion() {
+  void _changeQuestion() {
     setState(() {
-     currentQuestion = currentQuestion + 1; 
+      _currentQuestion = _currentQuestion + 1;
     });
   }
 
@@ -50,33 +50,33 @@ class MyAppState extends State<MyApp> {
             ],
           ),
         ),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              Text(questions[currentQuestion]),
-              RaisedButton(
-                child: Text("Asistio"),
-                onPressed: () {
-                  changeQuestion();
-                  print("Asistio!");
-                },
-              ),
-              RaisedButton(
-                child: Text("Llego tarde"),
-                onPressed: () {
-                  changeQuestion();
-                  print("Llego tarde!");
-                },
-              ),
-              RaisedButton(
-                child: Text("No llego"),
-                onPressed: () {
-                  changeQuestion();
-                  print("No llego!");
-                },
-              )
-            ],
-          ),
+        body: Column(
+          children: <Widget>[
+            Question(
+              questions[_currentQuestion],
+            ),
+            RaisedButton(
+              child: Text("Asistio"),
+              onPressed: () {
+                _changeQuestion();
+                print("Asistio!");
+              },
+            ),
+            RaisedButton(
+              child: Text("Llego tarde"),
+              onPressed: () {
+                _changeQuestion();
+                print("Llego tarde!");
+              },
+            ),
+            RaisedButton(
+              child: Text("No llego"),
+              onPressed: () {
+                _changeQuestion();
+                print("No llego!");
+              },
+            )
+          ],
         ),
       ),
     );
