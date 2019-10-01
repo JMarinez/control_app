@@ -1,6 +1,6 @@
-# control_app
+# udemy_quiz_app
 
-My first Flutter project. Recreating principal functions of an old project.
+My first Flutter project, a simple quiz app.
 
 ## Getting Started
 
