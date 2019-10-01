@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,6 +15,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _questions = [
+    {
+      "questionText": "How's the weather?",
+      "answers": ["Sunny", "Rainy", "Cloudy"]
+    },
+    {
+      "questionText": "How you doin?",
+      "answers": ["Good", "OK", "Sad", "Depressed"]
+    },
+    {
+      "questionText": "Is Flutter amazing?",
+      "answers": ["Totally", "It's alright", "Horrible"]
+    }
+  ];
+
   var _currentQuestion = 0;
 
   void _answerQuestion() {
@@ -25,55 +40,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const questions = [
-      {
-        "questionText": "How's the weather?", 
-        "answers": ["Sunny", "Rainy", "Cloudy"]
-      },
-      { 
-        "questionText": "How you doin?",
-        "answers": ["Good", "OK", "Sad", "Depressed"]
-      },
-      {
-        "questionText": "Is Flutter amazing?",
-        "answers": ["Totally", "It's alright", "Horrible"]
-      }
-    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text("Control App"),
           backgroundColor: Colors.red,
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Text("Drawer Header"),
-                decoration: BoxDecoration(color: Colors.red),
-              ),
-              ListTile(
-                title: Text("Asistencia"),
-                onTap: null,
-              ),
-              ListTile(
-                title: Text("Recursos Humanos"),
-                onTap: null,
+        body: _currentQuestion < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                currentQuestion: _currentQuestion,
+                questions: _questions,
               )
-            ],
-          ),
-        ),
-        body: Column(
-          children: <Widget>[
-            Question(
-              questions[_currentQuestion]["questionText"],
-            ),
-            ...(questions[_currentQuestion]["answers"] as List<String>).map((answer) {
-              return Answer(_answerQuestion, answer);
-            }).toList()
-          ],
-        ),
+            : Result(),
       ),
     );
   }
